@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input matches snapshot 1`] = `
+<View
+  style={
+    [
+      {
+        "marginHorizontal": 4,
+        "marginVertical": 8,
+      },
+      undefined,
+    ]
+  }
+>
+  <TextInput
+    inputMode="text"
+    onChangeText={[Function]}
+    style={
+      {
+        "backgroundColor": "#ccccff",
+        "borderRadius": 6,
+        "color": "#222",
+        "fontSize": 18,
+        "padding": 6,
+        "width": "100%",
+      }
+    }
+    value="Test"
+  />
+</View>
+`;
