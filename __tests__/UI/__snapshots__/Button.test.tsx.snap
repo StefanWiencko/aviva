@@ -6,7 +6,7 @@ exports[`Button matches snapshot 1`] = `
     [
       {
         "borderRadius": 4,
-        "overflow": "visible",
+        "overflow": "hidden",
       },
       undefined,
     ]

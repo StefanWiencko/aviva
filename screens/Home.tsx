@@ -11,29 +11,22 @@ const Home = ({ navigation }: HomeScreenProps) => {
   let content = <Text>No city selected</Text>;
 
   const { favoriteLocation } = useFavoriteLocation();
-  const [inputValue, setInputValue] = useState("");
-  const [selectedCity, setSelectedCity] = useState("");
+  const [cityName, setCityName] = useState("");
   const { data, error, isSuccess, isError, isPending } =
-    useWeatherData(selectedCity);
+    useWeatherData(cityName);
 
   useEffect(() => {
     if (favoriteLocation) {
-      setInputValue(favoriteLocation);
-      setSelectedCity(favoriteLocation);
+      setCityName(favoriteLocation);
     }
   }, [favoriteLocation]);
 
-  const checkWeatherButtonPressHandler = () => {
-    if (inputValue.length === 0) return;
-    setSelectedCity(inputValue);
-  };
-
   const detailsButtonPressHandler = () => {
-    if (selectedCity.length === 0) return;
-    navigation.navigate("WeatherDetails", { location: selectedCity });
+    if (cityName.length === 0) return;
+    navigation.navigate("WeatherDetails", { location: cityName });
   };
   const inputTextChangeHandler = (value: string) => {
-    setInputValue(value);
+    setCityName(value);
   };
 
   if (isPending) {
@@ -55,7 +48,7 @@ const Home = ({ navigation }: HomeScreenProps) => {
       </>
     );
   }
-  if (!selectedCity) {
+  if (!cityName) {
     content = <Text>No city selected</Text>;
   }
   return (
@@ -68,7 +61,7 @@ const Home = ({ navigation }: HomeScreenProps) => {
           <Input
             textInputConfig={{
               onChangeText: inputTextChangeHandler,
-              value: inputValue,
+              value: cityName,
               inputMode: "text",
               placeholder: "Enter name of the city",
             }}
@@ -77,12 +70,6 @@ const Home = ({ navigation }: HomeScreenProps) => {
               minWidth: 250,
             }}
           />
-          <Button
-            style={styles.button}
-            onPress={checkWeatherButtonPressHandler}
-          >
-            Check weather
-          </Button>
           <Button
             style={styles.button}
             onPress={detailsButtonPressHandler}

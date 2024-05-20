@@ -5,6 +5,7 @@ import IconButton from "@/components/UI/IconButton";
 import { useFavoriteLocation } from "@/store/favorite-location-context";
 import { Colors } from "@/constants/colors";
 import { useWeatherData } from "@/hooks/useWeatherData";
+import { capitalize } from "lodash";
 
 const WeatherDetails = ({ navigation, route }: WeatherDetailsScreenProps) => {
   const favoriteLocationCtx = useFavoriteLocation();
@@ -16,7 +17,7 @@ const WeatherDetails = ({ navigation, route }: WeatherDetailsScreenProps) => {
   const favoriteLocation = favoriteLocationCtx.favoriteLocation === data.name;
 
   const headerButtonPressHandler = () => {
-    if (favoriteLocationCtx.favoriteLocation) {
+    if (favoriteLocationCtx.favoriteLocation === data.name) {
       favoriteLocationCtx.setFavoriteLocation("");
     } else {
       favoriteLocationCtx.setFavoriteLocation(data.name);
@@ -42,6 +43,9 @@ const WeatherDetails = ({ navigation, route }: WeatherDetailsScreenProps) => {
     <View style={styles.container}>
       <Text style={styles.title}>Weather for {data.name}</Text>
       <View>
+        <Text style={styles.text}>
+          Description: {capitalize(data.weather[0].description)}
+        </Text>
         <Text style={styles.text}>
           Temperature: {Math.round(data.main.temp)}°C
         </Text>

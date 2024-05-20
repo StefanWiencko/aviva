@@ -1,4 +1,4 @@
-import { Platform, Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { Colors } from "@/constants/colors";
 
@@ -36,7 +36,7 @@ export default Button;
 
 const styles = StyleSheet.create({
   rootContainer: {
-    overflow: Platform.OS === "android" ? "hidden" : "visible",
+    overflow: "hidden",
     borderRadius: 4,
   },
   button: {

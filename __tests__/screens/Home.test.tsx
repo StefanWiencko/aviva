@@ -39,14 +39,14 @@ describe("Home component", () => {
   });
 
   it("renders correctly with no city selected", () => {
-    const { getByText, getByPlaceholderText } = render(
+    const { getByText } = render(
       <Home navigation={mockNavigation} route={mockRoute} />
     );
 
     expect(getByText("No city selected")).toBeTruthy();
   });
 
-  it("displays weather details when a city is selected and weather data is fetched successfully", async () => {
+  it("displays weather info when a city is selected and weather data is fetched successfully", async () => {
     jest.spyOn(require("@tanstack/react-query"), "useQuery").mockReturnValue({
       data: {
         main: { temp: 20 },
@@ -64,7 +64,6 @@ describe("Home component", () => {
     );
     const input = getByPlaceholderText("Enter name of the city");
     fireEvent.changeText(input, "London");
-    fireEvent.press(getByText("Check weather"));
 
     await waitFor(() => {
       expect(getByText("20°C")).toBeTruthy();
@@ -87,7 +86,6 @@ describe("Home component", () => {
     );
     const input = getByPlaceholderText("Enter name of the city");
     fireEvent.changeText(input, "InvalidCity");
-    fireEvent.press(getByText("Check weather"));
 
     await waitFor(() => {
       expect(getByText("Failed to fetch weather data")).toBeTruthy();
@@ -112,7 +110,6 @@ describe("Home component", () => {
     );
     const input = getByPlaceholderText("Enter name of the city");
     fireEvent.changeText(input, "London");
-    fireEvent.press(getByText("Check weather"));
 
     await waitFor(() => {
       fireEvent.press(getByText("Details"));
@@ -130,12 +127,11 @@ describe("Home component", () => {
       isPending: true,
     });
 
-    const { getByTestId, getByPlaceholderText, getByText } = render(
+    const { getByTestId, getByPlaceholderText } = render(
       <Home navigation={mockNavigation} route={mockRoute} />
     );
     const input = getByPlaceholderText("Enter name of the city");
     fireEvent.changeText(input, "London");
-    fireEvent.press(getByText("Check weather"));
 
     await waitFor(() => {
       expect(getByTestId("spinner")).toBeTruthy();
